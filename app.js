@@ -12,6 +12,8 @@ const render = require("./lib/htmlRenderer");
 
 const teamMembers = [];
 const idArray = [];
+const emailArray = [];
+const officeNumberArray = [];
 
 
 function mainMenu() {
@@ -42,10 +44,36 @@ function mainMenu() {
                 return "Please enter Id Number"
             }
         },
+        {
+            type: "input",
+            name: "managerEmail",
+            message: " what is your manager Email?",
+            validate: answer =>{
+                if (answer !== "") {
+                    return true;
+                    
+                }
+                return "Please enter Email"
+            }
+        },
+        {
+            type: "input",
+            name: "managerOfficeNUmber",
+            message: " what is your manager Office Number?",
+            validate: answer =>{
+                if (answer !== "") {
+                    return true;
+                    
+                }
+                return "Please enter Office Number"
+            }
+        },
     ]).then(answer => {
             const Manager = new Manager(answers.id)
             teamMembers.push(Manager)
             idArray.push(answer.managerId)
+            emailArray.push(answer.managerEmail)
+            officeNumberArray.push(answer.managerOfficeNumber)
         })
     }
 
