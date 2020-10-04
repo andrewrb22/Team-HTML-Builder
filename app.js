@@ -13,6 +13,7 @@ const render = require("./lib/htmlRenderer");
 const teamMembers = [];
 const idArray = [];
 
+
 function mainMenu() {
     function createManager() {
         console.log("please build your team");
@@ -27,6 +28,18 @@ function mainMenu() {
                     
                 }
                 return "Please enter name"
+            }
+        },
+        {
+            type: "input",
+            name: "managerId",
+            message: " what is your manager Id Number?",
+            validate: answer =>{
+                if (answer !== "") {
+                    return true;
+                    
+                }
+                return "Please enter Id Number"
             }
         },
     ]).then(answer => {
