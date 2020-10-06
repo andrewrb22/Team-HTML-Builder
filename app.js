@@ -2,45 +2,23 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
+
 const path = require("path");
 const fs = require("fs");
+
+
+
+
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-const { appendFile } = require("fs");
-const { appendFileSync } = require("fs");
+
 
 
 const teamMembers = [];
-let teamstr = ``;
 
- async function main() {
-    try {
-         await prompt()
-         // for i to teamMembers.length  => 
-
-         for (let i = 0; i < teamMembers.length; i++) {
-              //template literal=``
-              teamstr = teamstr + html.generateCard(teamMembers[i]);
-         }
-
-         let finalHTML = html.generateHTML(teamstr)
-
-         console.log(teamstr)
-
-         //call generate function to generate the html template literal
-
-         //write file 
-         writeFileAsync("templates\main.html", finalHTML)
-
-
-    } catch (err) {
-         return console.log(err);
-    }
-
-};
 
  async function prompt() {
     let responseDone = "";
@@ -82,38 +60,41 @@ let teamstr = ``;
               if (response.role === "Engineer") {
                    response2 = await inquirer.prompt([{
                         type: "input",
-                        name: "x",
+                        name: "github",
                         message: "What is the employee's github username?:",
                    }, ]);
                    //store the object and push
-                   const engineer = new Engineer(response.name, response.id, response.email, response2.x);
+                   const engineer = new Engineer(response.name, response.id, response.email, response2.github);
                    teamMembers.push(engineer);
-              } else if (response.role === "Intern") {
+
+              }
+              
+              else if (response.role === "Intern") {
                    response2 = await inquirer.prompt([{
                         type: "input",
-
-                        //the x is to only store into the team array
-                        name: "x",
+                        name: "school",
                         message: "What school is the employee attending?:",
                    }, ]);
                    //store the object and push
-                   const intern = new Intern(response.name, response.id, response.email, response2.x);
+                   const intern = new Intern(response.name, response.id, response.email, response2.school);
                    teamMembers.push(intern);
-              } else if (response.role === "Manager") {
+              } 
+              
+              else if (response.role === "Manager") {
                    response2 = await inquirer.prompt([{
                         type: "input",
-                        name: "x",
+                        name: "number",
                         message: "What is the employee's office number?:",
                    }, ]);
                    //store the object and push
-                   const manager = new Manager(response.name, response.id, response.email, response2.x);
+                   const manager = new Manager(response.name, response.id, response.email, response2.number);
                    teamMembers.push(manager);
               }
          } catch (err) {
               return console.log(err);
          }
          console.log(teamMembers)
-         //need to prompt do you want to continue
+         
 
          responseDone = await inquirer.prompt([{
               type: "list",
@@ -128,16 +109,21 @@ let teamstr = ``;
          // console.log(responseDone.choices);
          //the while parameter is saying continue running the code if the user selects "yes"
     } while (responseDone.finish === "Yes");
+
+function renderHTML(){
+     if(!fs.existsSync("./output")){
+         fs.mkdirSync("./output")
+     }
+     fs.writeFile(outputPath, render(teamMembers) , (err)=>{
+     if (err) throw err;
+     console.log("The file was saved!");
+ })
+ }
+
+renderHTML();
+
 }
-
-
-
-
-
-
-//call function to run application on the server
-main();
-
+prompt();
 
 
 
