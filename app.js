@@ -110,7 +110,7 @@ const teamMembers = [];
          //the while parameter is saying continue running the code if the user selects "yes"
     } while (responseDone.finish === "Yes");
 
-function renderHTML(){
+function htmlRenderer(){
      if(!fs.existsSync("./output")){
          fs.mkdirSync("./output")
      }
@@ -120,7 +120,7 @@ function renderHTML(){
  })
  }
 
-renderHTML();
+htmlRenderer();
 
 }
 prompt();
