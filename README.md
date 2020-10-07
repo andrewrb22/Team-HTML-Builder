@@ -3,10 +3,10 @@
 ## Description 
 Team-HTML-Builder is a software engineering team generator command line application. Unit tests created for this application. When the user has completed building the team, the application will create an HTML file that displays a nicely formatted team roster based on the information provided by the user.
 
-![](videos\Untitled_ Oct 6, 2020 7_25 PM.webm)
+![](videos\gift1.gif)
 
 
-![](videos\Untitled_ Oct 6, 2020 7_29 PM.webm)
+![](videos\gift2.gif)
 
 
 
